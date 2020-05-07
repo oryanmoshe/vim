@@ -24,6 +24,7 @@ endif
 nnoremap U <nop>
 nnoremap US :G<cr>
 nnoremap UB :Gblame<cr>
+nnoremap UP :Gpush<cr>
 
 set nocompatible              " be iMproved, required
 filetype plugin on                  " required
