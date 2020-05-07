@@ -26,6 +26,17 @@ nnoremap US :G<cr>
 nnoremap UB :Gblame<cr>
 nnoremap UP :Gpush<cr>
 
+nnoremap ,u :UndotreeToggle<cr>:UndotreeFocus<cr>
+
+nnoremap ,t :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+let g:NERDTreeWinSize=45
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+
+set directory^=$HOME/.vim/tmp//
+
 set nocompatible              " be iMproved, required
 filetype plugin on                  " required
 

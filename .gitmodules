@@ -37,3 +37,6 @@
 [submodule ".vim/pack/packless-schemas/start/material.vim"]
 	path = .vim/pack/packless-schemas/start/material.vim
 	url = git@github.com:kaicataldo/material.vim.git
+[submodule ".vim/pack/packless-plugins/start/undotree"]
+	path = .vim/pack/packless-plugins/start/undotree
+	url = git@github.com:mbbill/undotree.git

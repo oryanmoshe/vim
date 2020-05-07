@@ -1,3 +1,4 @@
 .vim/pack/packless-plugins/start/coc.nvim-release
 .vim/undodir
 .vim/param
+.vim/tmp
