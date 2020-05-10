@@ -40,3 +40,36 @@
 [submodule ".vim/pack/packless-plugins/start/undotree"]
 	path = .vim/pack/packless-plugins/start/undotree
 	url = git@github.com:mbbill/undotree.git
+[submodule ".vim/pack/packless-plugins/start/ack.vim"]
+	path = .vim/pack/packless-plugins/start/ack.vim
+	url = git@github.com:mileszs/ack.vim.git
+[submodule ".vim/pack/packless-plugins/start/fzf.vim"]
+	path = .vim/pack/packless-plugins/start/fzf.vim
+	url = git@github.com:junegunn/fzf.vim
+[submodule ".vim/pack/packless-plugins/start/vim-terraform"]
+	path = .vim/pack/packless-plugins/start/vim-terraform
+	url = git@github.com:hashivim/vim-terraform
+[submodule ".vim/pack/packless-plugins/start/vim-eunuch"]
+	path = .vim/pack/packless-plugins/start/vim-eunuch
+	url = git@github.com:tpope/vim-eunuch
+[submodule ".vim/pack/packless-plugins/start/vim-surround"]
+	path = .vim/pack/packless-plugins/start/vim-surround
+	url = git@github.com:tpope/vim-surround
+[submodule ".vim/pack/packless-plugins/start/vim-repeat"]
+	path = .vim/pack/packless-plugins/start/vim-repeat
+	url = git@github.com:tpope/vim-repeat
+[submodule ".vim/pack/packless-plugins/start/vim-easymotion"]
+	path = .vim/pack/packless-plugins/start/vim-easymotion
+	url = git@github.com:easymotion/vim-easymotion
+[submodule ".vim/pack/packless-plugins/start/incsearch-fuzzy.vim"]
+	path = .vim/pack/packless-plugins/start/incsearch-fuzzy.vim
+	url = git@github.com:haya14busa/incsearch-fuzzy.vim
+[submodule ".vim/pack/packless-plugins/start/incsearch.vim"]
+	path = .vim/pack/packless-plugins/start/incsearch.vim
+	url = git@github.com:haya14busa/incsearch.vim
+[submodule ".vim/pack/packless-plugins/start/incsearch-easymotion.vim"]
+	path = .vim/pack/packless-plugins/start/incsearch-easymotion.vim
+	url = git@github.com:haya14busa/incsearch-easymotion.vim
+[submodule ".vim/pack/packless-plugins/start/vim-devicons"]
+	path = .vim/pack/packless-plugins/start/vim-devicons
+	url = git@github.com:ryanoasis/vim-devicons

@@ -2,7 +2,7 @@ runtime configs/coc.vim
 runtime configs/persistant_undo.vim
 
 " Remaps
-runtime configs/remaps/
+runtime! configs/remaps/*
 
 if ! has('gui_running')
   set ttimeoutlen=10
@@ -14,7 +14,13 @@ if ! has('gui_running')
 endif
 
 let mapleader = ','
+let maplocalleader = '`'
 
+
+map <LocalLeader> <Plug>(easymotion-prefix)
+map <LocalLeader>ff <Plug>(easymotion-s2)
+nmap <LocalLeader>f <Plug>(easymotion-overwin-f)
+nmap <LocalLeader>w <Plug>(easymotion-overwin-w)
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -26,14 +32,41 @@ nnoremap US :G<cr>
 nnoremap UB :Gblame<cr>
 nnoremap UP :Gpush<cr>
 
-nnoremap ,u :UndotreeToggle<cr>:UndotreeFocus<cr>
 
-nnoremap ,t :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
+"let g:ackprg = 'ag --nogroup --nocolor --column'
+
+set conceallevel=0
+set autochdir
+
+" Searching file names
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -f -g ""'
+nnoremap <leader>/ :FZF<cr>
+
+nnoremap <leader>m :MarkdownPreview<cr>
+nnoremap <leader>mm :MarkdownPreviewStop<cr>
+
+"let g:mkdp_auto_start = 1
+
+:set spell spelllang=en_us
+
+
+" Searching all files
+command! -bang -nargs=* Find call fzf#vim#grep('ag --nogroup --column --hidden --ignore .git -f '.shellescape(<q-args>), 1, <bang>0)
+
+nnoremap <leader>u :UndotreeToggle<cr>:UndotreeFocus<cr>
+
+nnoremap <leader>tt :NERDTreeToggle<cr>
+nnoremap <leader>t :NERDTreeFind<cr>
+
+let g:NERDTreeShowHidden=1
 let g:NERDTreeWinSize=45
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
+
+let g:terraform_fmt_on_save=1
+
+"command! -bang -nargs=* Find call fzf#vim#grep('ag --nogroup --nocolor --column --hidden --ignore .git -f -g'.shellescape(<q-args>), 0, <bang>0)
+
+nnoremap ,f :Find 
 
 set directory^=$HOME/.vim/tmp//
 
