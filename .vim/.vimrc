@@ -39,15 +39,38 @@ set conceallevel=0
 set autochdir
 
 " Searching file names
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -f -g ""'
-nnoremap <leader>/ :FZF<cr>
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!.git/*" -g "!node_modules/*"'
+"let $FZF_DEFAULT_OPTS = '--hidden --color=always --smart-case'
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --ignore-file .git --hidden --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --hidden --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+
+"let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -f -g ""'
+nnoremap <leader>/ :Files<cr>
+nnoremap <leader>f :RG<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>ct :Commits<CR>
+nnoremap <leader>- <C-^>
 
 nnoremap <leader>m :MarkdownPreview<cr>
 nnoremap <leader>mm :MarkdownPreviewStop<cr>
 
+
 "let g:mkdp_auto_start = 1
 
-:set spell spelllang=en_us
+":set spell spelllang=en_us
 
 
 " Searching all files
@@ -66,7 +89,6 @@ let g:terraform_fmt_on_save=1
 
 "command! -bang -nargs=* Find call fzf#vim#grep('ag --nogroup --nocolor --column --hidden --ignore .git -f -g'.shellescape(<q-args>), 0, <bang>0)
 
-nnoremap ,f :Find 
 
 set directory^=$HOME/.vim/tmp//
 
@@ -82,6 +104,7 @@ endif
 set rtp+=/usr/local/opt/fzf
 
 " Put your non-Plugin stuff after this line
+let g:ale_disable_lsp = 1
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
@@ -111,7 +134,9 @@ set relativenumber
 set wildmenu
 set number
 set list
-set listchars=tab:?\ ,trail:.
+"set listchars=tab:?\ ,trail:.
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
 
 
 " Palenight
@@ -119,8 +144,9 @@ let g:material_theme_style='palenight'
 set background=dark
 colorscheme material
 
-
-
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
 
 map <C-y> :NERDTreeToggle<CR>
 
@@ -173,3 +199,4 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 hi Normal guibg=NONE ctermbg=NONE
+"let g:fzf_preview_window = ['right:50%', 'ctrl-/']
