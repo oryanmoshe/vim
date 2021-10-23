@@ -41,7 +41,7 @@ set autochdir
 " Searching file names
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!.git/*" -g "!node_modules/*"'
 "let $FZF_DEFAULT_OPTS = '--hidden --color=always --smart-case'
 "command! -bang -nargs=* Rg call fzf#vim#grep("rg --ignore-file .git --hidden --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
@@ -104,6 +104,7 @@ endif
 set rtp+=/usr/local/opt/fzf
 
 " Put your non-Plugin stuff after this line
+let g:ale_disable_lsp = 1
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
@@ -133,7 +134,9 @@ set relativenumber
 set wildmenu
 set number
 set list
-set listchars=tab:?\ ,trail:.
+"set listchars=tab:?\ ,trail:.
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
 
 
 " Palenight
