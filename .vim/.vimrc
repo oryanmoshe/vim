@@ -28,6 +28,8 @@ autocmd FileType scss setl iskeyword+=@-@
   "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
+"nnoremap <silent> <CR> :noh<CR><CR>
+nnoremap <silent> <esc><esc> :noh<CR>
 
 nnoremap U <nop>
 nnoremap US :G<cr>
