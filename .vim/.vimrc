@@ -1,5 +1,6 @@
 runtime configs/coc.vim
 runtime configs/persistant_undo.vim
+runtime configs/sessions.vim
 
 " Remaps
 runtime! configs/remaps/*
@@ -35,8 +36,9 @@ nnoremap UP :Gpush<cr>
 
 "let g:ackprg = 'ag --nogroup --nocolor --column'
 
+set hidden
 set conceallevel=0
-set autochdir
+"set autochdir
 
 " Searching file names
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
@@ -61,6 +63,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 nnoremap <leader>/ :Files<cr>
 nnoremap <leader>f :RG<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>s :ls<cr>:b<space>
 nnoremap <leader>ct :Commits<CR>
 nnoremap <leader>- <C-^>
 
@@ -132,11 +135,13 @@ set ignorecase
 set smartcase
 set relativenumber
 set wildmenu
+set wildmode=longest:full,full
 set number
 set list
 "set listchars=tab:?\ ,trail:.
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
+set path=.,**
 
 
 " Palenight
@@ -172,6 +177,16 @@ set encoding=utf-8
 set laststatus=2
 set t_Co=256
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#fnamemod = ':p:.'
+let g:airline#extensions#tabline#fnamecollapse = 0
+let g:airline#extensions#tabline#fnametruncate = 0
+
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+
 let g:airline_powerline_fonts = 1
 "let g:airline_extensions = []
 "let g:airline_highlighting_cache = 1
