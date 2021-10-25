@@ -5,7 +5,7 @@ runtime configs/sessions.vim
 " Remaps
 runtime! configs/remaps/*
 
-if ! has('gui_running')
+if !has('gui_running')
   set ttimeoutlen=10
   augroup FastEscape
     autocmd!
@@ -22,10 +22,11 @@ map <LocalLeader> <Plug>(easymotion-prefix)
 map <LocalLeader>ff <Plug>(easymotion-s2)
 nmap <LocalLeader>f <Plug>(easymotion-overwin-f)
 nmap <LocalLeader>w <Plug>(easymotion-overwin-w)
+autocmd FileType scss setl iskeyword+=@-@
 
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-endif
+"if has("autocmd")
+  "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+"endif
 
 
 nnoremap U <nop>
@@ -43,8 +44,13 @@ set conceallevel=0
 " Searching file names
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!.git/*" -g "!node_modules/*"'
-"let $FZF_DEFAULT_OPTS = '--hidden --color=always --smart-case'
+let $FZF_DEFAULT_COMMAND = 'rg --hidden --files -g "!.git/*" -g "!node_modules/*"'
+"let $FZF_DEFAULT_OPTS = '--ansi --ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'
+let $FZF_DEFAULT_OPTS = "--ansi"
+"let $FZF_PREVIEW_COMMAND="bat --style=numbers,changes --wrap never --color always {} || cat {} || tree -C {}"
+let $FZF_PREVIEW_COMMAND="bat --style=numbers --color=always --line-range :300 {}"
+"let $FZF_DEFAULT_OPTS = '--hidden ' " --color=always --smart-case'
+"let $FZF_DEFAULT_OPTS = '--hidden -g "!.git/*" -g "!node_modules/*" --color=always --smart-case'
 "command! -bang -nargs=* Rg call fzf#vim#grep("rg --ignore-file .git --hidden --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
 
@@ -63,12 +69,13 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 nnoremap <leader>/ :Files<cr>
 nnoremap <leader>f :RG<CR>
 nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>s :ls<cr>:b<space>
 nnoremap <leader>ct :Commits<CR>
 nnoremap <leader>- <C-^>
 
 nnoremap <leader>m :MarkdownPreview<cr>
 nnoremap <leader>mm :MarkdownPreviewStop<cr>
+
+nnoremap <expr> <leader>s ':ls<cr>:b<space>'. fnamemodify(getcwd(), ':t'). '*'
 
 
 "let g:mkdp_auto_start = 1
@@ -142,6 +149,12 @@ set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 set path=.,**
+"set path=$PWD/**
+set wildignore+=*/min/*,*/vendor/*,*/node_modules/*,*/bower_components/*
+set wildignore+=**/node_modules/** 
+set wildignore+=**/.git/** 
+set complete-=i
+
 
 
 " Palenight
@@ -183,6 +196,8 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#fnamemod = ':p:.'
 let g:airline#extensions#tabline#fnamecollapse = 0
 let g:airline#extensions#tabline#fnametruncate = 0
+let g:airline_highlighting_cache = 1
+let g:airline_extensions = ['tabline']
 
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
 
